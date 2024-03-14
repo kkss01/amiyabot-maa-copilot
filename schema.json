@@ -1,0 +1,11 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "simpleKeyword": {
+            "title": "启用简单前缀关键词",
+            "description": "关闭后, 只能使用 '兔兔抄作业', 避免与其他插件冲突 ",
+            "type": "boolean"
+        }
+    }
+}
