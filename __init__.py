@@ -1,0 +1,1 @@
+from .maaCopiloty import bot
