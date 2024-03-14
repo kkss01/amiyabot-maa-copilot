@@ -22,7 +22,7 @@ class MaaCopilotPluginInstance(AmiyaBotPluginInstance):
 
 bot = MaaCopilotPluginInstance(
     name='maa作业查询',
-    version='1.1',
+    version='1.1.3',
     plugin_id='kkss-maa-copilot',
     plugin_type='',
     description='让兔兔可以查询maa作业',
@@ -83,7 +83,7 @@ async def build_result(response:dict):
     md += f"作者: {cop['uploader']} &emsp;"
     md += f"{cop['upload_time'].split('T')[0]} &emsp;"
     md += '</font></font>' 
-    code = '神秘代码:  maa://' + str(cop['id'])
+    code = '\n神秘代码:  maa://' + str(cop['id'])
 
     return [md, code]
 
@@ -95,6 +95,7 @@ async def query_verify(data:Message):
         return True, 6, '抄作业'
     
     if text.startswith('maa') and bot.get_config('simpleKeyword'):
+        print('maa!!ture')
         return True, 6, 'maa'
     
     return False
@@ -102,7 +103,7 @@ async def query_verify(data:Message):
 
 @bot.on_message(verify=query_verify)
 async def _(data: Message):
-    search = data.text.split(data.verify.keypoint, 1)[1].strip()
+    search = data.text.lower().split(data.verify.keypoint, 1)[1].strip()
     if search.__len__() < 2:
         return Chain(data).text('关键词过短, 请重新搜索')
     search = search.split(' ', 1)
